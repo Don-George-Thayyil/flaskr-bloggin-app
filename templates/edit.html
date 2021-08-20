@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="border: 1px solid black;">
+    <img class="rounded-circle" src="{{url_for('static',filename='profile_pics/'+data.author.image_file)}}" alt="">
+    <h3 style="padding:10px;">{{ data.title }}</h1>
+        <p style="color:grey;padding:10px;font-size:12px">By {{ data.author.username }} on {{ data.date_posted.strftime('%Y-%m-%d') }}</p>
+        <div style="padding:10px;">
+            <p style="padding:15px;border: 1px solid rgb(214, 211, 211);">{{ data.content }}</p>
+        </div>
+</div>
+{% endblock %}

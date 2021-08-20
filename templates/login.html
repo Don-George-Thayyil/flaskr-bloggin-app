@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div style="text-align: left;">
+    <form action="" method="POST">
+        {{ data.hidden_tag() }}
+        <fieldset class="form-group" style="padding: 10px">
+            <legend>Sign in here</legend>
+
+            <div style="padding:5px;">
+                {{data.email.label}}:
+                {%if data.email.errors%}
+                {{data.email(class="is-invalid")}}
+                <div class="invalid-feedback"></div>
+                {% for error in data.email.errors %}
+                <span>{{error}}</span>
+                {%endfor%}
+                {%else%}
+                {{data.email}}
+                {%endif%}
+            </div>
+            <div style="padding:5px;">
+                {{data.password.label}}:
+                {%if data.password.errors%}
+                {{data.password(class="is-invalid")}}
+                <div class="invalid-feedback"></div>
+                {% for error in data.password.errors %}
+                <span>{{error}}</span>
+                {%endfor%}
+                {%else%}
+                {{data.password}}
+                {%endif%}
+            </div>
+            <div>
+                {{data.remember}}
+                {{data.remember.label}}
+            </div>
+
+        </fieldset>
+        <div style="padding:5px;">
+            {{data.submit}}
+        </div>
+        <small class="text-muted">
+            <a href="{{url_for('reset_request')}}">Forgot password!!</a>
+        </small>
+    </form>
+</div>
+<div>
+    <p>Don't have an account ? <a href="{{url_for('signup')}}">Signup</a></p>
+</div>
+{% endblock %}

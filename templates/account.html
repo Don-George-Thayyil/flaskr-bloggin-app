@@ -1,0 +1,53 @@
+{%extends "layout.html"%}
+{% block content %}
+<div style="text-align:center;">
+    <img class="rounded-circle" style="width: 100px; height:auto"
+        src="{{image_file}}" alt="profile-picture">
+    <h1>{{current_user.username}}</h1>
+    <p>{{current_user.email}}</p>
+</div>
+<div style="text-align:center;">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{ data.hidden_tag() }}
+        <fieldset class="form-group" style="padding: 10px">
+            <legend>Account Info</legend>
+            <div style="padding:5px;">
+                {{data.username.label}}:
+                {%if data.username.errors%}
+                    {{data.username(class="is-invalid")}}
+                    <div class="invalid-feedback"></div>
+                    {% for error in data.username.errors %}
+                        <span class="text-danger">{{error}}</span>
+                    {%endfor%}
+                {%else%}
+                    {{data.username}}
+                {%endif%}
+            </div>
+            <div style="padding:5px;">
+                {{data.email.label}}:
+                {%if data.email.errors%}
+                    {{data.email(class="is-invalid")}}
+                    <div class="invalid-feedback"></div>
+                    {% for error in data.email.errors %}
+                        <span class="text-danger">{{error}}</span>
+                    {%endfor%}
+                {%else%}
+                    {{data.email}}
+                {%endif%}
+            </div>
+            <div>
+                {{data.picture.lable}}
+                {{data.picture}}
+                {%if data.picture.errors%}
+                    {%for error in data.picture.errors%}
+                        <span class="text-danger">{{error}}</span>
+                    {%endfor%}
+                {%endif%}
+            </div>
+        </fieldset>
+        <div style="padding:5px;">
+            {{data.submit}}
+        </div>
+    </form>
+</div>
+{% endblock %}

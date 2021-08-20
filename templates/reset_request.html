@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div style="text-align: left;">
+    <form action="" method="POST">
+        {{ data.hidden_tag() }}
+        <fieldset class="form-group" style="padding: 10px">
+            <legend>Reset Password here</legend>
+
+            <div style="padding:5px;">
+                {{data.email.label}}:
+                {%if data.email.errors%}
+                    {{data.email(class="is-invalid")}}
+                    <div class="invalid-feedback"></div>
+                    {% for error in data.email.errors %}
+                        <span>{{error}}</span>
+                    {%endfor%}
+                {%else%}
+                    {{data.email}}
+                {%endif%}
+            </div>            
+        </fieldset>
+        <div style="padding:5px;">
+            {{data.submit}}
+        </div>
+    </form>
+</div>
+{% endblock %}

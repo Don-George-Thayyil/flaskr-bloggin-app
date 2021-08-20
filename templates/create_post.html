@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="text-align: left;">
+    <form action="" method="POST">
+        {{ data.hidden_tag() }}
+        <fieldset class="form-group" style="padding: 10px">
+            <legend>{{legend}}</legend>
+
+            <div style="padding:5px;">
+                {{data.title.label}}:
+                {%if data.title.errors%}
+                {{data.title(class="is-invalid")}}
+                <div class="invalid-feedback"></div>
+                {% for error in data.title.errors %}
+                <span>{{error}}</span>
+                {%endfor%}
+                {%else%}
+                {{data.title}}
+                {%endif%}
+            </div>
+            <div style="padding:5px;">
+                {{data.content.label}}:
+                {%if data.content.errors%}
+                {{data.content(class="is-invalid")}}
+                <div class="invalid-feedback"></div>
+                {% for error in data.content.errors %}
+                <span>{{error}}</span>
+                {%endfor%}
+                {%else%}
+                {{data.content}}
+                {%endif%}
+            </div>
+           
+
+        </fieldset>
+        <div style="padding:5px;">
+            {{data.submit}}
+        </div>        
+    </form>
+</div>
+{%endblock%}

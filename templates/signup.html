@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div style="text-align: left;">
+<form action="" method="POST">
+    {{ data.hidden_tag() }}
+    <fieldset class="form-group" style="padding: 10px">
+        <legend>Join today</legend>
+        <div style="padding:5px;">
+            {{data.username.label}}:
+            {%if data.username.errors%}
+            {{data.username(class="is-invalid")}}
+            <div class="invalid-feedback"></div>
+            {% for error in data.username.errors %}
+            <span>{{error}}</span>
+            {%endfor%}
+            {%else%}
+            {{data.username}}
+            {%endif%}
+        </div>
+        <div style="padding:5px;">
+            {{data.email.label}}:
+            {%if data.email.errors%}
+            {{data.email(class="is-invalid")}}
+            <div class="invalid-feedback"></div>
+            {% for error in data.email.errors %}
+            <span>{{error}}</span>
+            {%endfor%}
+            {%else%}
+            {{data.email}}
+            {%endif%}
+        </div>
+        <div style="padding:5px;">
+            {{data.password.label}}:
+            {%if data.password.errors%}
+            {{data.password(class="is-invalid")}}
+            <div class="invalid-feedback"></div>
+            {% for error in data.password.errors %}
+            <span>{{error}}</span>
+            {%endfor%}
+            {%else%}
+            {{data.password}}
+            {%endif%}
+        </div>
+        <div style="padding:5px;">
+            {{data.confirm_password.label}}:
+            {%if data.confirm_password.errors%}
+            {{data.confirm_password(class="is-invalid")}}
+            <div class="invalid-feedback"></div>
+            {% for error in data.confirm_password.errors %}
+            <span>{{error}}</span>
+            {%endfor%}
+            {%else%}
+            {{data.confirm_password}}
+            {%endif%}
+        </div>
+    </fieldset>
+    <div style="padding:5px;">
+        {{data.submit}}
+    </div>
+</form>
+</div>
+<div>
+    <p>Already have an account ? <a href="{{url_for('login')}}">Login</a></p>
+</div>
+{% endblock %}

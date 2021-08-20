@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+        {% if title %}
+        <title>{{title}}</title>
+        {% else %}
+        <title>Flaskr Blog</title>
+        {% endif %}
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                <div style="font-size:1rem; text-align:justify;">
+                    <a href="{{url_for('home')}}" style="padding-left :10px">Home</a>
+                    {% if current_user.is_authenticated %}
+                        <a href="{{url_for('account')}}">Account</a>
+                        <a href="{{url_for('logout')}}">Logout</a>
+                        <a href="{{url_for('new_post')}}">New post</a>
+                    {%else%}
+                        <a href="{{url_for('login')}}">Login</a>
+                        <a href="{{url_for('signup')}}">Sign-Up</a>   
+                    {%endif%}                 
+                </div>              
+            </nav>
+        </header>
+        <div class="container">
+            <div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {%for category, message in messages%}
+                <div class="alert alert-{{category}}">
+                    {{message}}
+                </div>
+                {%endfor%}
+                {%endif%}
+                {% endwith %}
+            </div>
+            {% block content %}
+            {% endblock %}
+            <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+            <script
+                src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+                integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+                crossorigin="anonymous"></script>
+            <script
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+                integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+                crossorigin="anonymous"></script>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="border: 1px solid black;">
+    <img class="rounded-circle" style="width: 125px; height:auto;" src="{{url_for('static',filename='profile_pics/'+data.author.image_file)}}" alt="">
+    <h3 style="padding:10px;">{{ data.title }}</h1>
+        <p style="color:grey;padding:10px;font-size:12px">By {{ data.author.username }} on {{ data.date_posted.strftime('%Y-%m-%d') }}</p>
+        <div style="padding:10px;">
+            <p style="padding:15px;border: 1px solid rgb(214, 211, 211);">{{ data.content }}</p>
+        </div>
+        {% if data.author == current_user %}
+        <a class="btn btn-primary" href="{{url_for('edit_post',post_id = data.id)}}">Edit Post</a>
+        <a class="btn btn-danger" href="{{url_for('delete_post',post_id = data.id)}}" onclick="return confirm
+        ('You are deleting the post!!')">Delete Post</a>
+        {%endif%}
+</div>
+{% endblock %}

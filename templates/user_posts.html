@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+    <h1 class="mb-3">Posts by {{user.username}}({{data.total}}) </h1>
+    {% for post in data.items %}
+    <div style="border: 1px solid black;">
+        <img class="rounded-circle" style="width:125px; height:auto;" src="{{url_for('static',filename='profile_pics/'+post.author.image_file)}}" alt="">
+        <h3 style="padding:10px;"> <a href="{{url_for('post',post_id = post.id)}}"> {{ post.title }}</a></h1>
+            <a href="{{url_for('user_posts')"><p style="color:grey;padding:10px;font-size:12px">By {{ post.author.username }}</a> on {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+            <div style="padding:10px;">
+                <p style="padding:15px;border: 1px solid rgb(214, 211, 211);">{{ post.content }}</p>
+            </div>
+            
+    </div>
+
+    {% endfor %}
+
+    {%for page_num in data.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)%}
+        {% if page_num %}
+            {%if data.page == page_num%}
+            <a href="{{url_for('home',page=page_num)}}" class="btn btn-info mb-1">{{page_num}}</a>
+            {%else%}
+            <a href="{{url_for('home',page=page_num)}}" class="btn btn-outline-info mb-1">{{page_num}}</a>
+            {%endif%}
+        {%else%}
+            ...
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}
